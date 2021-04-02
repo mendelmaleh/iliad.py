@@ -1,5 +1,3 @@
-import asyncio
-import configparser
 import textwrap
 
 import aiohttp
@@ -68,19 +66,3 @@ async def get(user: str, password: str) -> Account:
     self.number = info.css(".smaller").re_first("Numero: ([0-9 ]+)")
 
     return self
-
-
-async def main():
-    cp = configparser.ConfigParser()
-    cp.read("config.ini")
-
-    user = await get(cp["iliad"]["user"], cp["iliad"]["pass"])
-    print(user)
-
-    # with open("saved", 'w') as f:
-    #     f.write(user.html)
-
-
-if __name__ == "__main__":
-    loop = asyncio.get_event_loop()
-    loop.run_until_complete(main())
